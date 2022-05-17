@@ -2,7 +2,6 @@ package postgresql
 
 import (
 	"database/sql"
-	// "encoding/json"
 	"fmt"
 	"log"
 	"strings"
