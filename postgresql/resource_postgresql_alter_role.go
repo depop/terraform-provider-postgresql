@@ -191,7 +191,7 @@ func alterRole(txn *sql.Tx, d *schema.ResourceData) error {
 	query := createAlterRoleQuery(d)
 	log.Println(query)
 	if _, err := txn.Exec(query); err != nil {
-		return fmt.Errorf("could not execute alter query testing message: %w", err)
+		return fmt.Errorf("could not execute alter query: (%s): %w", query, err)
 	}
 	return nil
 }

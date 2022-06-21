@@ -13,8 +13,8 @@ import (
 
 func TestCreateAlterRoleQuery(t *testing.T) {
 	var roleName = "foo"
-	var parameterKey = "bar"
-	var parameterValue = "foo"
+	var parameterKey = "log_statement"
+	var parameterValue = "ALL"
 
 	cases := []struct {
 		resource map[string]interface{}
@@ -43,7 +43,7 @@ func TestCreateAlterRoleQuery(t *testing.T) {
 
 func TestResetRoleQuery(t *testing.T) {
 	var roleName = "foo"
-	var parameterKey = "pgaudit.role"
+	var parameterKey = "log_statement"
 
 	expected := fmt.Sprintf("ALTER ROLE %s RESET %s", pq.QuoteIdentifier(roleName), pq.QuoteIdentifier(parameterKey))
 
@@ -77,7 +77,7 @@ func TestAccPostgresqlAlterRole(t *testing.T) {
 
 	_, roleName := getTestDBNames(dbSuffix)
 
-	parameterKey := "pgaudit.log"
+	parameterKey := "log_statement"
 	parameterValue := "ALL"
 
 	testAccPostgresqlAlterRoleResources := fmt.Sprintf(`
@@ -136,7 +136,7 @@ func checkAlterRole(t *testing.T, dsn, role string, parameterKey string, paramet
 			)
 
 		case err != nil:
-			t.Fatalf("could not check roles attributes: %v", err)
+			t.Fatalf("could not check role attributes: %v", err)
 		}
 
 		return nil
